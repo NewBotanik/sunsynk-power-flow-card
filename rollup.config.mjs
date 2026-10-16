@@ -13,7 +13,8 @@ const plugins = [
     main: true,
   }),
   commonjs(),
-  typescript(),
+  // Explicit include: rpt2's default '*.ts+(|x)' matches nothing with picomatch 2.3.2
+  typescript({ include: ['*.ts?(x)', '**/*.ts?(x)'] }),
   json(),
   babel({
     exclude: 'node_modules/**',
