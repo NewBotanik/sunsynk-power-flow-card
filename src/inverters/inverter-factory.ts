@@ -30,6 +30,7 @@ import { Solinteg } from './brands/solinteg';
 import { DeyeNew } from './brands/deye-new';
 import { Chisage } from './brands/chisage';
 import { SRNEHES } from './brands/srnehes';
+import { JsdSolar } from './brands/jsdsolar';
 
 export class InverterFactory {
 	static instance: InverterSettingsDto;
@@ -43,6 +44,8 @@ export class InverterFactory {
 
 	private static createInstance(brand: InverterModel): InverterSettingsDto {
 		switch (brand) {
+			case InverterModel.JsdSolar:
+				return new JsdSolar();
 			case InverterModel.SRNEHES:
 				return new SRNEHES();
 			case InverterModel.Chisage:

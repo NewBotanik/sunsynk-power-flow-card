@@ -1,0 +1,34 @@
+import { InverterSettingsDto } from '../dto/inverter-settings.dto';
+import { InverterModel } from '../../types';
+import { localize } from '../../localize/localize';
+
+// JSD SOLAR J5500HPC/J5500HP. States: the operating_mode sensor of the
+// jsdsolar_j5500hpc_j5500hp integration (GMOD: Power-on, Standby, Line, Battery, Fault, Shutdown, Test).
+// The card lower-cases the state before matching, so states are listed in lower case.
+export class JsdSolar extends InverterSettingsDto {
+	brand = InverterModel.JsdSolar;
+	statusGroups = {
+		standby: {
+			states: ['standby', 'shutdown'],
+			color: 'blue',
+			message: localize('common.standby'),
+		},
+		selftest: {
+			states: ['power-on', 'test'],
+			color: 'yellow',
+			message: localize('common.selftest'),
+		},
+		normal: {
+			states: ['line', 'battery'],
+			color: 'green',
+			message: localize('common.normal'),
+		},
+		fault: {
+			states: ['fault'],
+			color: 'red',
+			message: localize('common.fault'),
+		},
+	};
+	image =
+		'data:image/png;base64,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';
+}
