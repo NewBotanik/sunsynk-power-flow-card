@@ -22,6 +22,7 @@ export enum InverterModel {
 	GoodweGridMode = 'goodwe_gridmode',
 	Growatt = 'growatt',
 	Huawei = 'huawei',
+	JsdSolar = 'jsdsolar',
 	Linky = 'linky',
 	Lux = 'lux',
 	MakeSkyBlue = 'makeskyblue',
