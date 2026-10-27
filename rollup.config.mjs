@@ -11,6 +11,7 @@ const plugins = [
   nodeResolve({
     jsnext: true,
     main: true,
+    extensions: ['.mjs', '.js', '.json', '.node', '.ts'],
   }),
   commonjs(),
   // Explicit include: rpt2's default '*.ts+(|x)' matches nothing with picomatch 2.3.2
@@ -29,6 +30,7 @@ const plugins = [
           targets: '> 2.5%, not dead',
         },
       ],
+      '@babel/preset-typescript',
     ],
     plugins: [
       [

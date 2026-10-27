@@ -10,13 +10,7 @@ export interface AuxIconConfig {
 	displayCondition: boolean;
 	opacityCondition: boolean;
 	iconType:
-		| 'boiler'
-		| 'aircon'
-		| 'pump'
-		| 'oven'
-		| 'generator'
-		| 'inverter'
-		| 'aux';
+		'boiler' | 'aircon' | 'pump' | 'oven' | 'generator' | 'inverter' | 'aux';
 	prefix: string;
 	dynamicColor: string;
 	viewBoxSize: number;
@@ -37,7 +31,7 @@ export const renderStaticAuxIcon = (config: AuxIconConfig) => {
 			opacity="${config.opacityCondition ? '1' : '0'}"
 		>
 			<path
-				display="${config.displayCondition ? 'none' : ''}"
+				display="${config.displayCondition ? 'none' : 'inline'}"
 				fill="${config.dynamicColor}"
 				d="${iconPath}"
 			/>

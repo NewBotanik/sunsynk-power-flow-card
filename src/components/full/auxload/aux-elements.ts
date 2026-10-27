@@ -61,7 +61,7 @@ export const renderAuxLoadElements = (
 				fill="none"
 				stroke="${data.auxDynamicColourLoad1}"
 				pointer-events="all"
-				display="${showAux ? '' : 'none'}"
+				display="${showAux ? 'inline' : 'none'}"
 				class="${[1, 2].includes(additionalAuxLoad) ? '' : 'st12'}"
 			/>
 			<rect
@@ -75,7 +75,7 @@ export const renderAuxLoadElements = (
 				fill="none"
 				stroke="${data.auxDynamicColourLoad2}"
 				pointer-events="all"
-				display="${!showAux ? 'none' : ''}"
+				display="${!showAux ? 'none' : 'inline'}"
 				class="${additionalAuxLoad === 2 ? '' : 'st12'}"
 			/>
 			${renderText(
@@ -233,21 +233,23 @@ export const renderAuxLoadElements = (
 					<g
 						transform="translate(0.000000,91.000000) scale(0.100000,-0.100000)"
 						class="${data.auxType === 'inverter' ? '' : 'st12'}"
-						display="${!showAux || [1, 2].includes(additionalAuxLoad)
-							? 'none'
-							: ''}"
-						fill="${auxStatus === 'on' || auxStatus === '1'
-							? `${auxDynamicColour}`
-							: `${data.auxOffColour}`}"
+						display="${
+							!showAux || [1, 2].includes(additionalAuxLoad) ? 'none' : ''
+						}"
+						fill="${
+							auxStatus === 'on' || auxStatus === '1'
+								? `${auxDynamicColour}`
+								: `${data.auxOffColour}`
+						}"
 						stroke="none"
 					>
 						<path d="${icons.inverter}" />
 					</g>
 				</svg>
 				<g
-					display="${!showAux || [1, 2].includes(additionalAuxLoad)
-						? 'none'
-						: ''}"
+					display="${
+						!showAux || [1, 2].includes(additionalAuxLoad) ? 'none' : ''
+					}"
 				>
 					${renderIcon(
 						undefined,
@@ -260,7 +262,7 @@ export const renderAuxLoadElements = (
 					)}
 				</g>
 			</a>
-			<g display="${!showAux || additionalAuxLoad === 0 ? 'none' : ''}">
+			<g display="${!showAux || additionalAuxLoad === 0 ? 'none' : 'inline'}">
 				${renderIcon(
 					undefined,
 					data.iconAuxLoad1,
@@ -272,9 +274,9 @@ export const renderAuxLoadElements = (
 				)}
 			</g>
 			<g
-				display="${!showAux || [0, 1].includes(additionalAuxLoad)
-					? 'none'
-					: ''}"
+				display="${
+					!showAux || [0, 1].includes(additionalAuxLoad) ? 'none' : ''
+				}"
 			>
 				${renderIcon(
 					undefined,
@@ -299,8 +301,9 @@ export const renderAuxLoadElements = (
 				(e) => Utils.handlePopup(e, config.entities.day_aux_energy),
 				true,
 			)}
-			${config.entities?.aux_power_166
-				? svg`
+			${
+				config.entities?.aux_power_166
+					? svg`
                     ${createTextWithPopup(
 											'aux_power_166',
 											270,
@@ -311,7 +314,10 @@ export const renderAuxLoadElements = (
 											auto_scale
 												? `${
 														config.load.show_absolute_aux
-															? `${Math.abs(parseFloat(Utils.convertValue(auxPower, decimalPlaces)))} ${Utils.convertValue(auxPower, decimalPlaces).split(' ')[1]}`
+															? Utils.convertValue(
+																	Math.abs(auxPower),
+																	decimalPlaces,
+																) || '0'
 															: Utils.convertValue(auxPower, decimalPlaces) ||
 																'0'
 													}`
@@ -324,7 +330,7 @@ export const renderAuxLoadElements = (
 												Utils.handlePopup(e, config.entities.aux_power_166),
 											true,
 										)}`
-				: svg`
+					: svg`
                     ${renderText(
 											'aux_power_166',
 											270,
@@ -335,7 +341,10 @@ export const renderAuxLoadElements = (
 											auto_scale
 												? `${
 														config.load.show_absolute_aux
-															? `${Math.abs(parseFloat(Utils.convertValue(auxPower, decimalPlaces)))} ${Utils.convertValue(auxPower, decimalPlaces).split(' ')[1]}`
+															? Utils.convertValue(
+																	Math.abs(auxPower),
+																	decimalPlaces,
+																) || '0'
 															: Utils.convertValue(auxPower, decimalPlaces) ||
 																'0'
 													}`
@@ -345,7 +354,8 @@ export const renderAuxLoadElements = (
 															: auxPower || 0
 													} ${UnitOfPower.WATT}`,
 											true,
-										)}`}
+										)}`
+			}
 			${createTextWithPopup(
 				'aux_load1_value',
 				411,

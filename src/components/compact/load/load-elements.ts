@@ -77,7 +77,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${dynamicColourEssentialLoad1}"
 					pointer-events="all"
-					display="${[1, 2, 3].includes(additionalLoad) ? '' : 'none'}"
+					display="${[1, 2, 3].includes(additionalLoad) ? 'inline' : 'none'}"
 				/>
 				${renderText(
 					'es-load1',
@@ -114,7 +114,9 @@ export const renderLoadElements = (
 					)} ${data.stateEssentialLoad1Extra?.getUOM()}`,
 					(e) => Utils.handlePopup(e, config.entities.essential_load1_extra),
 				)}
-				<g display="${[0, 4, 5, 6].includes(additionalLoad) ? 'none' : ''}">
+				<g
+					display="${[0, 4, 5, 6].includes(additionalLoad) ? 'none' : 'inline'}"
+				>
 					${renderIcon(
 						load1_switch,
 						data.iconEssentialLoad1,
@@ -136,7 +138,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${dynamicColourEssentialLoad2}"
 					pointer-events="all"
-					display="${additionalLoad === 2 ? '' : 'none'}"
+					display="${additionalLoad === 2 ? 'inline' : 'none'}"
 				/>
 				${renderText(
 					'es-load2',
@@ -172,7 +174,7 @@ export const renderLoadElements = (
 					)} ${data.stateEssentialLoad2Extra?.getUOM()}`,
 					(e) => Utils.handlePopup(e, config.entities.essential_load2_extra),
 				)}
-				<g display="${additionalLoad === 2 ? '' : 'none'}">
+				<g display="${additionalLoad === 2 ? 'inline' : 'none'}">
 					${renderIcon(
 						config.load.load2_switch,
 						data.iconEssentialLoad2,
@@ -194,7 +196,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad2}"
 					pointer-events="all"
-					display="${additionalLoad === 3 ? '' : 'none'}"
+					display="${additionalLoad === 3 ? 'inline' : 'none'}"
 				/>
 				<rect
 					id="es-load3"
@@ -207,7 +209,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad3}"
 					pointer-events="all"
-					display="${additionalLoad === 3 ? '' : 'none'}"
+					display="${additionalLoad === 3 ? 'inline' : 'none'}"
 				/>
 				${renderText(
 					'es-load2',
@@ -227,7 +229,7 @@ export const renderLoadElements = (
 					dynamicColourEssentialLoad3,
 					load3_name,
 				)}
-				<g display="${additionalLoad === 3 ? '' : 'none'}">
+				<g display="${additionalLoad === 3 ? 'inline' : 'none'}">
 					${renderIcon(
 						config.load.load2_switch,
 						data.iconEssentialLoad2,
@@ -236,7 +238,7 @@ export const renderLoadElements = (
 						264,
 					)}
 				</g>
-				<g display="${additionalLoad === 3 ? '' : 'none'}">
+				<g display="${additionalLoad === 3 ? 'inline' : 'none'}">
 					${renderIcon(
 						config.load.load3_switch,
 						data.iconEssentialLoad3,
@@ -308,7 +310,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad3}"
 					pointer-events="all"
-					display="${additionalLoad >= 4 ? '' : 'none'}"
+					display="${additionalLoad >= 4 ? 'inline' : 'none'}"
 				/>
 				<rect
 					id="es-load1"
@@ -321,7 +323,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad1}"
 					pointer-events="all"
-					display="${additionalLoad >= 4 ? '' : 'none'}"
+					display="${additionalLoad >= 4 ? 'inline' : 'none'}"
 				/>
 				<rect
 					id="es-load2"
@@ -334,7 +336,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad2}"
 					pointer-events="all"
-					display="${additionalLoad >= 4 ? '' : 'none'}"
+					display="${additionalLoad >= 4 ? 'inline' : 'none'}"
 				/>
 				<rect
 					id="es-load4"
@@ -347,7 +349,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad4}"
 					pointer-events="all"
-					display="${additionalLoad >= 4 ? '' : 'none'}"
+					display="${additionalLoad >= 4 ? 'inline' : 'none'}"
 				/>
 				${renderText(
 					'es-load1',
@@ -385,7 +387,7 @@ export const renderLoadElements = (
 					dynamicColourEssentialLoad4,
 					load4_name,
 				)}
-				<g display="${additionalLoad >= 4 ? '' : 'none'}">
+				<g display="${additionalLoad >= 4 ? 'inline' : 'none'}">
 					${renderIcon(
 						load1_switch,
 						data.iconEssentialLoad1,
@@ -394,7 +396,7 @@ export const renderLoadElements = (
 						81,
 					)}
 				</g>
-				<g display="${additionalLoad >= 4 ? '' : 'none'}">
+				<g display="${additionalLoad >= 4 ? 'inline' : 'none'}">
 					${renderIcon(
 						load2_switch,
 						data.iconEssentialLoad2,
@@ -403,7 +405,7 @@ export const renderLoadElements = (
 						81,
 					)}
 				</g>
-				<g display="${additionalLoad >= 4 ? '' : 'none'}">
+				<g display="${additionalLoad >= 4 ? 'inline' : 'none'}">
 					${renderIcon(
 						load3_switch,
 						data.iconEssentialLoad3,
@@ -412,7 +414,7 @@ export const renderLoadElements = (
 						264,
 					)}
 				</g>
-				<g display="${additionalLoad >= 4 ? '' : 'none'}">
+				<g display="${additionalLoad >= 4 ? 'inline' : 'none'}">
 					${renderIcon(
 						load4_switch,
 						data.iconEssentialLoad4,
@@ -524,12 +526,14 @@ export const renderLoadElements = (
 			</svg>
 			<svg
 				id="Esential-Load5"
-				style="overflow: visible; display: ${[5, 6].includes(additionalLoad)
-					? config.wide ||
-						(!config.wide && [1, 2, 3].includes(config.solar.mppts))
-						? 'inline'
-						: 'none'
-					: `none`};"
+				style="overflow: visible; display: ${
+					[5, 6].includes(additionalLoad)
+						? config.wide ||
+							(!config.wide && [1, 2, 3].includes(config.solar.mppts))
+							? 'inline'
+							: 'none'
+						: `none`
+				};"
 				x="${config.wide ? '-5%' : '-7.35%'}"
 			>
 				<rect
@@ -543,7 +547,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad5}"
 					pointer-events="all"
-					display="${[5, 6].includes(additionalLoad) ? '' : 'none'}"
+					display="${[5, 6].includes(additionalLoad) ? 'inline' : 'none'}"
 				/>
 				${renderText(
 					'es-load5',
@@ -554,7 +558,7 @@ export const renderLoadElements = (
 					dynamicColourEssentialLoad5,
 					load5_name,
 				)}
-				<g display="${[5, 6].includes(additionalLoad) ? '' : 'none'}">
+				<g display="${[5, 6].includes(additionalLoad) ? 'inline' : 'none'}">
 					${renderIcon(
 						load5_switch,
 						data.iconEssentialLoad5,
@@ -591,12 +595,14 @@ export const renderLoadElements = (
 			</svg>
 			<svg
 				id="Esential-Load6"
-				style="overflow: visible; display: ${[6].includes(additionalLoad)
-					? config.wide ||
-						(!config.wide && [1, 2, 3].includes(config.solar.mppts))
-						? 'inline'
-						: 'none'
-					: `none`};"
+				style="overflow: visible; display: ${
+					[6].includes(additionalLoad)
+						? config.wide ||
+							(!config.wide && [1, 2, 3].includes(config.solar.mppts))
+							? 'inline'
+							: 'none'
+						: `none`
+				};"
 				x="${config.wide ? '-5%' : '-7.35%'}"
 			>
 				<rect
@@ -610,7 +616,7 @@ export const renderLoadElements = (
 					fill="none"
 					stroke="${data.dynamicColourEssentialLoad6}"
 					pointer-events="all"
-					display="${additionalLoad === 6 ? '' : 'none'}"
+					display="${additionalLoad === 6 ? 'inline' : 'none'}"
 				/>
 				${renderText(
 					'es-load6',
@@ -621,7 +627,7 @@ export const renderLoadElements = (
 					dynamicColourEssentialLoad6,
 					load6_name,
 				)}
-				<g display="${additionalLoad === 6 ? '' : 'none'}">
+				<g display="${additionalLoad === 6 ? 'inline' : 'none'}">
 					${renderIcon(
 						load6_switch,
 						data.iconEssentialLoad6,
@@ -685,8 +691,9 @@ export const renderLoadElements = (
 						}${auto_scale ? '' : ` ${UnitOfPower.WATT}`}`
 					: '0',
 			)}
-			${config.inverter.three_phase && config.entities?.load_power_L1
-				? svg`<a
+			${
+				config.inverter.three_phase && config.entities?.load_power_L1
+					? svg`<a
 							href="#"
 							@click=${(e: Event) => Utils.handlePopup(e, config.entities.load_power_L1)}
 						>
@@ -699,9 +706,11 @@ export const renderLoadElements = (
 								pointer-events="all"
 							/>
 						</a>`
-				: ''}
-			${config.inverter.three_phase && config.entities?.load_power_L2
-				? svg`<a
+					: ''
+			}
+			${
+				config.inverter.three_phase && config.entities?.load_power_L2
+					? svg`<a
 							href="#"
 							@click=${(e: Event) => Utils.handlePopup(e, config.entities.load_power_L2)}
 						>
@@ -714,9 +723,11 @@ export const renderLoadElements = (
 								pointer-events="all"
 							/>
 						</a>`
-				: ''}
-			${config.inverter.three_phase && config.entities?.load_power_L3
-				? svg`<a
+					: ''
+			}
+			${
+				config.inverter.three_phase && config.entities?.load_power_L3
+					? svg`<a
 							href="#"
 							@click=${(e: Event) => Utils.handlePopup(e, config.entities.load_power_L3)}
 						>
@@ -729,7 +740,8 @@ export const renderLoadElements = (
 								pointer-events="all"
 							/>
 						</a>`
-				: ''}
+					: ''
+			}
 			<svg id="load-flow">
 				${renderPath(
 					'es-line',
@@ -827,9 +839,11 @@ export const renderLoadElements = (
 			)}
 			<a
 				href="#"
-				@click=${config.load?.navigate
-					? (e) => Utils.handleNavigation(e, config.load.navigate)
-					: null}
+				@click=${
+					config.load?.navigate
+						? (e) => Utils.handleNavigation(e, config.load.navigate)
+						: null
+				}
 			>
 				<svg
 					id="essen"
@@ -849,31 +863,35 @@ export const renderLoadElements = (
 						>
 							<stop
 								offset="0%"
-								stop-color="${data.gridPercentage > 0
-									? data.gridColour
-									: data.batteryPercentage > 0
-										? batteryColour
-										: solarColour}"
+								stop-color="${
+									data.gridPercentage > 0
+										? data.gridColour
+										: data.batteryPercentage > 0
+											? batteryColour
+											: solarColour
+								}"
 							/>
 							<stop
 								offset="${data.gridPercentage}%"
-								stop-color="${data.gridPercentage > 0
-									? data.gridColour
-									: data.batteryPercentage > 0
-										? batteryColour
-										: solarColour}"
+								stop-color="${
+									data.gridPercentage > 0
+										? data.gridColour
+										: data.batteryPercentage > 0
+											? batteryColour
+											: solarColour
+								}"
 							/>
 							<stop
 								offset="${data.gridPercentage}%"
-								stop-color="${data.batteryPercentage > 0
-									? batteryColour
-									: solarColour}"
+								stop-color="${
+									data.batteryPercentage > 0 ? batteryColour : solarColour
+								}"
 							/>
 							<stop
 								offset="${data.gridPercentage + data.batteryPercentage}%"
-								stop-color="${data.batteryPercentage > 0
-									? batteryColour
-									: solarColour}"
+								stop-color="${
+									data.batteryPercentage > 0 ? batteryColour : solarColour
+								}"
 							/>
 							<stop
 								offset="${data.gridPercentage + data.batteryPercentage}%"
@@ -899,9 +917,10 @@ export const renderLoadElements = (
 				(e) => Utils.handlePopup(e, config.entities.day_load_energy_84),
 				true,
 			)}
-			${config.entities?.essential_power &&
-			config.entities.essential_power !== 'none'
-				? svg`
+			${
+				config.entities?.essential_power &&
+				config.entities.essential_power !== 'none'
+					? svg`
                     ${createTextWithPopup(
 											'ess_power',
 											340.1,
@@ -915,7 +934,7 @@ export const renderLoadElements = (
 											(e) =>
 												Utils.handlePopup(e, config.entities.essential_power),
 										)}`
-				: svg`
+					: svg`
                     ${renderText(
 											'ess_power',
 											340.1,
@@ -926,7 +945,8 @@ export const renderLoadElements = (
 											auto_scale
 												? `${Utils.convertValue(essentialPower, decimalPlaces) || 0}`
 												: `${essentialPower || 0} ${UnitOfPower.WATT}`,
-										)}`}
+										)}`
+			}
 			${guard(
 				[
 					data.additionalLoad,

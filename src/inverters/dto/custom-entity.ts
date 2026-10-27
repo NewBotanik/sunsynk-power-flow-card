@@ -1,4 +1,4 @@
-import { HassEntity } from 'home-assistant-js-websocket/dist/types';
+import { HassEntity } from 'home-assistant-js-websocket';
 import { Utils } from '../../helpers/utils';
 import {
 	Percentage,
@@ -13,13 +13,13 @@ import {
  */
 export interface CustomEntity extends HassEntity {
 	state: string;
+	attributes: {
+		unit_of_measurement?: string;
+		[key: string]: unknown;
+	};
 	decimals: number;
 	measurement:
-		| UnitOfPower
-		| UnitOfEnergy
-		| UnitOfElectricalCurrent
-		| Percentage
-		| 'NA';
+		UnitOfPower | UnitOfEnergy | UnitOfElectricalCurrent | Percentage | 'NA';
 
 	/**
 	 * Extension of Utils.toNum, returns the state in a number
@@ -163,11 +163,7 @@ const __CONVERT_ENTITY_CACHE_MAX = 4096;
 function toDisplayFunction(
 	state: string,
 	measurement:
-		| UnitOfPower
-		| UnitOfEnergy
-		| UnitOfElectricalCurrent
-		| Percentage
-		| 'NA',
+		UnitOfPower | UnitOfEnergy | UnitOfElectricalCurrent | Percentage | 'NA',
 	decimals?: number,
 ): string {
 	//console.log(state, measurement, decimals);
