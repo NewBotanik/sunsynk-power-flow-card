@@ -24,7 +24,7 @@ export class SunSynkCardEditor
 	implements LovelaceCardEditor
 {
 	@property() public hass!: HomeAssistant;
-	@property() private _config!: sunsynkPowerFlowCardConfig;
+	private _config!: sunsynkPowerFlowCardConfig;
 	@property() lovelace?: LovelaceConfig;
 
 	// Cache for performance
@@ -207,7 +207,7 @@ export class SunSynkCardEditor
 
 		// Pattern-based helper hints for dynamic load/aux subfields
 		if (SunSynkCardEditor.PATTERN_LOAD_NAME.test(name))
-			return 'Label for additional load.';
+			return 'Additional load label (can be set via sensor).';
 		if (SunSynkCardEditor.PATTERN_LOAD_ICON.test(name))
 			return 'Additional load icon (Can be set via template sensor).';
 		if (SunSynkCardEditor.PATTERN_LOAD_SWITCH.test(name))
@@ -508,6 +508,7 @@ export class SunSynkCardEditor
 			...(clone as unknown as sunsynkPowerFlowCardConfig),
 		};
 		this._configVersion++;
+		this.requestUpdate();
 	}
 
 	protected render(): TemplateResult | void {
@@ -549,12 +550,14 @@ export class SunSynkCardEditor
 			);
 		}
 
+		const sanitizedConfig = this._sanitizedConfig();
+
 		return html`
 			<ha-form
 				.hass=${this.hass}
-				.data=${this._sanitizedConfig()}
-				.computeLabel=${this._computeLabelCallback.bind(this)}
-				.computeHelper=${this._computeHelperCallback.bind(this)}
+				.data=${sanitizedConfig}
+				.computeLabel=${this._computeLabelCallback}
+				.computeHelper=${this._computeHelperCallback}
 				.schema=${[
 					{
 						type: 'expandable',
@@ -695,6 +698,7 @@ export class SunSynkCardEditor
 												{
 													name: 'solar',
 													type: 'grid',
+													column_min_width: '100%',
 													schema: [
 														{ name: 'max_power', selector: { entity: {} } },
 														{ name: 'pv1_max_power', selector: { entity: {} } },
@@ -814,6 +818,7 @@ export class SunSynkCardEditor
 														{
 															name: 'battery',
 															type: 'grid',
+															column_min_width: '100%',
 															schema: [
 																{ name: 'energy', selector: { entity: {} } },
 																{
@@ -933,6 +938,7 @@ export class SunSynkCardEditor
 																	{
 																		name: 'battery2',
 																		type: 'grid',
+																		column_min_width: '100%',
 																		schema: [
 																			{
 																				name: 'energy',
@@ -1134,18 +1140,43 @@ export class SunSynkCardEditor
 									{
 										name: 'load',
 										type: 'grid',
+										column_min_width: '100%',
 										schema: [
 											...((this._config.load?.additional_loads ?? 0) >= 1
-												? [{ name: 'load1_icon', selector: { entity: {} } }]
+												? [
+														{ name: 'load1_name', selector: { entity: {} } },
+														{ name: 'load1_icon', selector: { entity: {} } },
+													]
 												: []),
 											...((this._config.load?.additional_loads ?? 0) >= 2
-												? [{ name: 'load2_icon', selector: { entity: {} } }]
+												? [
+														{ name: 'load2_name', selector: { entity: {} } },
+														{ name: 'load2_icon', selector: { entity: {} } },
+													]
 												: []),
 											...((this._config.load?.additional_loads ?? 0) >= 3
-												? [{ name: 'load3_icon', selector: { entity: {} } }]
+												? [
+														{ name: 'load3_name', selector: { entity: {} } },
+														{ name: 'load3_icon', selector: { entity: {} } },
+													]
 												: []),
 											...((this._config.load?.additional_loads ?? 0) >= 4
-												? [{ name: 'load4_icon', selector: { entity: {} } }]
+												? [
+														{ name: 'load4_name', selector: { entity: {} } },
+														{ name: 'load4_icon', selector: { entity: {} } },
+													]
+												: []),
+											...((this._config.load?.additional_loads ?? 0) >= 5
+												? [
+														{ name: 'load5_name', selector: { entity: {} } },
+														{ name: 'load5_icon', selector: { entity: {} } },
+													]
+												: []),
+											...((this._config.load?.additional_loads ?? 0) >= 6
+												? [
+														{ name: 'load6_name', selector: { entity: {} } },
+														{ name: 'load6_icon', selector: { entity: {} } },
+													]
 												: []),
 											...((this._config.load?.aux_loads ?? 0) >= 1
 												? [{ name: 'aux_load1_icon', selector: { entity: {} } }]
@@ -1228,6 +1259,7 @@ export class SunSynkCardEditor
 												{
 													name: 'grid',
 													type: 'grid',
+													column_min_width: '100%',
 													schema: [
 														{ name: 'load1_icon', selector: { entity: {} } },
 														{ name: 'load2_icon', selector: { entity: {} } },
@@ -1258,6 +1290,7 @@ export class SunSynkCardEditor
 									{
 										name: 'entities',
 										type: 'grid',
+										column_min_width: '100%',
 										schema: [
 											{
 												name: 'day_pv_energy_108',
@@ -1411,6 +1444,7 @@ export class SunSynkCardEditor
 									{
 										name: 'entities',
 										type: 'grid',
+										column_min_width: '100%',
 										schema: [
 											{
 												name: 'day_battery_charge_70',
@@ -1433,6 +1467,7 @@ export class SunSynkCardEditor
 											{
 												name: 'entities',
 												type: 'grid',
+												column_min_width: '100%',
 												schema: [
 													{
 														name: 'battery_power_190',
@@ -1495,6 +1530,7 @@ export class SunSynkCardEditor
 														{
 															name: 'entities',
 															type: 'grid',
+															column_min_width: '100%',
 															schema: [
 																{
 																	name: 'battery2_power_190',
@@ -1568,6 +1604,7 @@ export class SunSynkCardEditor
 									{
 										name: 'entities',
 										type: 'grid',
+										column_min_width: '100%',
 										schema: [
 											{ name: 'inverter_status_59', selector: { entity: {} } },
 											{ name: 'use_timer_248', selector: { entity: {} } },
@@ -1671,6 +1708,7 @@ export class SunSynkCardEditor
 									{
 										name: 'entities',
 										type: 'grid',
+										column_min_width: '100%',
 										schema: [
 											{
 												name: 'day_load_energy_84',
@@ -1803,6 +1841,7 @@ export class SunSynkCardEditor
 									{
 										name: 'entities',
 										type: 'grid',
+										column_min_width: '100%',
 										schema: [
 											{
 												name: 'day_grid_import_76',
@@ -1902,7 +1941,7 @@ export class SunSynkCardEditor
 						],
 					},
 				]}
-				@value-changed=${this._valueChanged.bind(this)}
+				@value-changed=${this._valueChanged}
 			></ha-form>
 		`;
 	}
@@ -1915,6 +1954,7 @@ export class SunSynkCardEditor
 		// Clear cache when config changes
 		this._cachedSanitizedConfig = undefined;
 		this._lastCachedVersion = -1;
+		this.requestUpdate();
 		fireEvent(this, 'config-changed', { config });
 	}
 
@@ -1978,7 +2018,7 @@ export class SunSynkCardEditor
 		return this._t(`config.cat_title.${opt}`, opt);
 	}
 
-	private _valueChanged(ev: CustomEvent): void {
+	private _valueChanged = (ev: CustomEvent): void => {
 		// ha-form returns color_rgb as arrays or {r,g,b}; ensure all '*_colour' values become hex strings before emitting
 		const v = ev.detail.value as Record<string, unknown>;
 		// IMPORTANT: do NOT mutate v (the form's live value). Clone before normalization to avoid breaking the picker UI.
@@ -2014,5 +2054,5 @@ export class SunSynkCardEditor
 		}
 		// Update local config and emit cloned hex-normalized config; this keeps the form's RGB value intact
 		this._emitConfig(out as unknown as sunsynkPowerFlowCardConfig);
-	}
+	};
 }
